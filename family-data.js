@@ -383,7 +383,7 @@ const maternalData = {
                     gender: "female",
                     spouse: "Ashok Antala",
                     children: [
-                        { name: "Pooja", gender: "female", spouse: "Yash" },
+                        { name: "Pooja", gender: "female", spouse: "Yash Raole" },
                         { name: "Shama", gender: "female" }
                     ]
                 }
