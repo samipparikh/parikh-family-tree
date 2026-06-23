@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parikh Family Tree</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header">
+        <h1>Parikh Family Tree</h1>
+        <div id="controls">
+            <button id="btn-paternal" class="active">Paternal Side (Parikh)</button>
+            <button id="btn-maternal">Maternal Side (Ratilal & Sharda)</button>
+            <button id="btn-both">Both Sides</button>
+            <button id="btn-zoom-in">+</button>
+            <button id="btn-zoom-out">−</button>
+            <button id="btn-reset">Reset View</button>
+        </div>
+    </div>
+    <div id="tree-container">
+        <svg id="tree-svg"></svg>
+    </div>
+    <div id="tooltip" class="hidden"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="family-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
