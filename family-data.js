@@ -334,15 +334,15 @@ const paternalData = {
 };
 
 const maternalData = {
-    name: "Ratilal Contractor (Ba)",
+    name: "Ratilal Contractor (Dada)",
     gender: "male",
     details: "Family Patriarch, Contractor family",
-    spouse: "Sharda (Dada)",
+    spouse: "Sharda (Ba)",
     children: [
         {
             name: "Asmita",
             gender: "female",
-            spouse: "Surendra",
+            spouse: "Surendra Bodiwala",
             children: [
                 {
                     name: "Ami",
@@ -392,7 +392,7 @@ const maternalData = {
         {
             name: "Jayshree",
             gender: "female",
-            spouse: "Sudhir",
+            spouse: "Sudhir Parikh",
             isHighlighted: true,
             children: [
                 {
@@ -417,7 +417,7 @@ const maternalData = {
             ]
         },
         {
-            name: "Geeta",
+            name: "Geera",
             gender: "female",
             spouse: "Nayan",
             children: [
@@ -438,7 +438,7 @@ const maternalData = {
                 {
                     name: "Kesha",
                     gender: "female",
-                    spouse: "Maulin",
+                    spouse: "Maulin Shah",
                     children: [
                         { name: "Deven", gender: "male" },
                         { name: "Jal", gender: "male" }
@@ -462,7 +462,7 @@ const maternalData = {
                 {
                     name: "Mili",
                     gender: "female",
-                    spouse: "Aditya",
+                    spouse: "Aditya Shah",
                     children: [
                         { name: "Arya", gender: "female" },
                         { name: "Arjun", gender: "male" }
