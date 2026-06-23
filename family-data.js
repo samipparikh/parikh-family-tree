@@ -334,9 +334,9 @@ const paternalData = {
 };
 
 const maternalData = {
-    name: "Ratilal (Ba)",
+    name: "Ratilal Contractor (Ba)",
     gender: "male",
-    details: "Family Patriarch",
+    details: "Family Patriarch, Contractor family",
     spouse: "Sharda (Dada)",
     children: [
         {

@@ -20,6 +20,18 @@
 
     svg.call(zoom);
 
+    function collapseAfterDepth(node, maxDepth, depth = 0) {
+        if (node.children && depth >= maxDepth) {
+            node._children = node.children;
+            node.children = null;
+        }
+        if (node.children) {
+            node.children.forEach(child => collapseAfterDepth(child, maxDepth, depth + 1));
+        }
+    }
+
+    let initialRender = true;
+
     function buildHierarchy(data) {
         return d3.hierarchy(data, d => d.children);
     }
@@ -28,6 +40,11 @@
         container.selectAll("*").remove();
 
         const root = buildHierarchy(data);
+
+        if (initialRender) {
+            collapseAfterDepth(root, 1);
+            initialRender = false;
+        }
         const treeLayout = d3.tree()
             .nodeSize([horizontalSpacing, verticalSpacing])
             .separation((a, b) => {
@@ -114,14 +131,15 @@
         const fullWidth = parent.clientWidth;
         const fullHeight = parent.clientHeight;
 
+        const padding = 60;
         const scale = Math.min(
-            fullWidth / (bounds.width + 100),
-            fullHeight / (bounds.height + 100),
-            1
+            fullWidth / (bounds.width + padding * 2),
+            fullHeight / (bounds.height + padding * 2),
+            1.5
         );
 
         const tx = fullWidth / 2 - (bounds.x + bounds.width / 2) * scale;
-        const ty = 40 - bounds.y * scale;
+        const ty = fullHeight / 2 - (bounds.y + bounds.height / 2) * scale;
 
         svg.transition()
             .duration(750)
@@ -161,6 +179,7 @@
         setActive("btn-paternal");
         currentView = "paternal";
         currentData = paternalData;
+        initialRender = true;
         renderTree(currentData);
     });
 
@@ -168,12 +187,14 @@
         setActive("btn-maternal");
         currentView = "maternal";
         currentData = maternalData;
+        initialRender = true;
         renderTree(currentData);
     });
 
     document.getElementById("btn-both").addEventListener("click", () => {
         setActive("btn-both");
         currentView = "both";
+        initialRender = true;
         currentData = {
             name: "Sudhir & Jayshree",
             gender: "couple",
@@ -187,9 +208,9 @@
                     children: paternalData.children
                 },
                 {
-                    name: "Maternal: Ratilal & Sharda",
+                    name: "Maternal: Contractor",
                     gender: "female",
-                    details: "Mom's side",
+                    details: "Mom's side (Ratilal & Sharda)",
                     children: maternalData.children
                 },
                 {
