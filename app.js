@@ -12,10 +12,23 @@
     const horizontalSpacing = 200;
     const verticalSpacing = 80;
 
+    const zoomLevel = document.getElementById("zoom-level");
+    const zoomSelect = document.getElementById("zoom-select");
+
+    function updateZoomDisplay(scale) {
+        const pct = Math.round(scale * 100);
+        zoomLevel.textContent = pct + "%";
+        const closest = [...zoomSelect.options].reduce((prev, opt) =>
+            Math.abs(parseFloat(opt.value) - scale) < Math.abs(parseFloat(prev.value) - scale) ? opt : prev
+        );
+        zoomSelect.value = closest.value;
+    }
+
     const zoom = d3.zoom()
         .scaleExtent([0.2, 3])
         .on("zoom", (event) => {
             container.attr("transform", event.transform);
+            updateZoomDisplay(event.transform.k);
         });
 
     svg.call(zoom);
@@ -245,7 +258,21 @@
         svg.transition().call(zoom.scaleBy, 0.7);
     });
 
+    zoomSelect.addEventListener("change", (e) => {
+        const targetScale = parseFloat(e.target.value);
+        const parent = svg.node().parentElement;
+        const fullWidth = parent.clientWidth;
+        const fullHeight = parent.clientHeight;
+        const cx = fullWidth / 2;
+        const cy = fullHeight / 2;
+        svg.transition().duration(500).call(
+            zoom.transform,
+            d3.zoomIdentity.translate(cx, cy).scale(targetScale).translate(-cx, -cy)
+        );
+    });
+
     document.getElementById("btn-reset").addEventListener("click", () => {
+        initialRender = true;
         renderTree(currentData);
     });
 
